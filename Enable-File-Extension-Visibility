@@ -1,0 +1,12 @@
+# Verificar si la visualización de extensiones de archivo está activada
+
+# Obtener la configuración actual del Registro para la visualización de extensiones de archivo
+$registryKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+$registryName = "HideFileExt"
+$newValue = 0
+$hideFileExtValue = (Get-ItemProperty -Path $registryKey -Name $registryName).HideFileExt
+
+# Comprobar si la visualización de extensiones de archivo está activada
+if ($hideFileExtValue -ne 0) {
+    Set-ItemProperty -Path $registryKey -Name $registryName -Value $newValue
+}
